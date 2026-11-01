@@ -1,2 +1,64 @@
-# Masrofaty-Page
+# 🌐 صفحة الهبوط ثلاثية الأبعاد لتطبيق مصروفاتي (Masrofaty 3D Landing Page)
+
 صفحة هبوط عصرية وتفاعلية مصممة بأعلى معايير الويب الحديثة ثلاثية الأبعاد (3D WebGL) لتسويق وتحميل تطبيق **"مصروفاتي"** لنظام أندرويد.
+
+## ✨ المميزات البصرية والتفاعلية:
+- **3D Canvas (Three.js):** عملات ومجسمات مالية ثلاثية الأبعاد تطفو وتتحرك بتناغم مع حركة الماوس والإضاءة.
+- **مجسم هاتف 3D تفاعلي (Interactive Phone Mockup):** يميل بزاوية 3D مع انعكاسات ضوئية وشاشات تحاكي التطبيق الفعلي.
+- **حاسبة الحد اليومي الآمن (Live Calculator):** تجربة حية لحساب معدل الصرف اليومي الموصى به ديناميكياً.
+- **أزرار التحميل:**
+  - 📥 **تحميل APK مباشر** من الملف المحلي `./masrofaty.apk`.
+  - ☁️ **تحميل عبر MediaFire:** مربوط بالرابط: `https://www.mediafire.com/file/7vhyvhda97sx1mu/Masrofaty.apk/`.
+  - 📱 **رمز QR Code:** لمسح الكود بكاميرا الموبايل والبدء بالتنزيل.
+## 🌟 نبذة عن المشروع
+
+**مصروفاتي (Masrofaty)** هو حل مالي متكامل مصمم خصيصاً للمستخدم العربي لمساعدته على حل المعضلة الكبرى: **"انتهاء الراتب قبل نهاية الشهر"**.
+
+عبر خوارزمية **"الحد اليومي الآمن (Safe Daily Limit)"**، يقوم التطبيق بتقسيم المتبقي من ميزانيتك على عدد الأيام المتبقية في دورتك المالية، ويتكيف فورياً مع كل مصروف تسجله ليخبرك بدقة بالغة كم يمكنك أن تنفق اليوم لتبقى دائماً في المنطقة الآمنة وتضاعف مدخراتك!
+
+بالإضافة إلى تطبيق الموبايل، يحتوي المشروع على **صفحة هبوط ثلاثية الأبعاد (3D Landing Page)** عصرية تم بناؤها باستخدام **Three.js** و **CSS Glassmorphism** لتسويق التطبيق وتوفير روابط تحميل فورية للمستخدمين.
+
+---
+
+## 📥 روابط تحميل التطبيق (Android APK)
+
+| وسيلة التحميل | الرابط | الحالة |
+| :--- | :--- | :---: |
+| ☁️ **سيرفر MediaFire السريع** | [**تحميل ملف الـ APK من MediaFire**](https://www.mediafire.com/file/7vhyvhda97sx1mu/Masrofaty.apk/) | ✅ مباشر ومتاح |
+| ⚡ **رابط مباشر بديل (Expo EAS)** | [**تحميل مباشر من خوادم EAS**](https://expo.dev/artifacts/eas/qoFIMIHwkNveQ2T0fRGPPztavpLqoZ2AdMjurWF7JeQ.apk) | ✅ دائم |
+| 📁 **الملف المحلي بالمشروع** | `landing/masrofaty.apk` (حجم الملف: ~124 ميجابايت) | ✅ متوفر محلياً |
+
+---
+
+## ✨ مميزات التطبيق (Mobile App Features)
+
+- 🛡️ **خوارزمية الحد اليومي الآمن:** حساب لحظي وديناميكي للمبلغ المسموح بإنفاقه يومياً بناءً على المتبقي من الميزانية والأيام المتبقية.
+- 📅 **دورة مالية مرنة:** إمكانية تخصيص تاريخ بداية ونهاية الميزانية بحرية تامة (شهرية، أسبوعية، من يوم 25 إلى يوم 25، إلخ).
+- 📊 **رسوم بيانية وتحليلات ذكية:** مخططات دائرية (Donut Charts) لتوزيع النفقات ومخططات أعمدة للمقارنة بين الأيام.
+- ⚡ **تسجيل سريع للمصروف:** إدخال المبلغ، التصنيف، الملاحظات مع دعم ردود الفعل اللمسية (Haptic Feedback).
+- 🔍 **سجل منظم وبحث متقدم:** فلترة المصروفات حسب التصنيف والتاريخ وإمكانية تعديل أو حذف أي عملية في ثوانٍ.
+- ☁️ **مزامنة سحابية فائقة الأمان:** بياناتك مشفرة ومحفوظة فورياً على خوادم **Supabase**.
+- 🎨 **واجهة عربية أصيلة:** دعم كامل لاتجاه RTL مع خط **Cairo** المتميز وتصميم Dark/Light ناعم ومريح للعين.
+
+---
+
+## 🛠️ التقنيات المستخدمة (Tech Stack)
+
+- **Mobile Framework:** [React Native](https://reactnative.dev/) with [Expo](https://expo.dev/) (SDK 57)
+- **Routing:** [Expo Router](https://docs.expo.dev/router/introduction/) (File-based routing)
+- **3D Graphics & Visuals:** [Three.js](https://threejs.org/)
+- **Database & Backend:** [Supabase](https://supabase.com/)
+- **Charts:** [react-native-svg](https://github.com/software-mansion/react-native-svg)
+- **Animations:** [react-native-reanimated](https://docs.swmansion.com/react-native-reanimated/) & [react-native-worklets](https://github.com/software-mansion/react-native-worklets)
+- **Icons:** [Lucide Icons](https://lucide.dev/)
+- **Typography:** [Cairo Font](https://fonts.google.com/specimen/Cairo) via Google Fonts
+
+---
+
+## 📄 الترخيص (License)
+
+هذا المشروع مرخص تحت رخصة **MIT**. يمكنك استخدامه وتطويره بحرية.
+
+<div align="center">
+  <b>صُنع بحب ❤️ لمساعدة الجميع على إدارة أموالهم بذكاء</b>
+</div>
