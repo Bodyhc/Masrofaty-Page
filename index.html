@@ -1,0 +1,790 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#0d9488">
+  <title>مصروفاتي | Masrofaty - تطبيق إدارة الميزانية والحد اليومي الآمن</title>
+  
+  <meta name="description" content="تطبيق مصروفاتي الذكي يساعدك على ضبط ميزانيتك الشهرية، حساب حدك اليومي الآمن للإنفاق، وتتبع كافة مصاريفك برسوم بيانية تفاعلية ومزامنة سحابية فائقة السرعة.">
+  <meta property="og:title" content="مصروفاتي - تحكّم بمصروفاتك بذكاء واعرف حدك اليومي الآمن">
+  <meta property="og:description" content="حمّل ملف APK لتطبيق مصروفاتي الآن برابط مباشر أو عبر ميديا فاير، وابدأ في تنظيم أموالك وحفظ مدخراتك.">
+  <meta property="og:image" content="./assets/icon.png">
+  <meta property="og:type" content="website">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="./assets/icon.png">
+  <link rel="apple-touch-icon" href="./assets/icon.png">
+
+  <!-- Google Fonts: Cairo & Outfit -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;800;900&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Stylesheet -->
+  <link rel="stylesheet" href="style.css">
+
+  <!-- Three.js for 3D Interactive Canvas -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+</head>
+<body>
+
+  <!-- Background 3D Canvas -->
+  <canvas id="bg-canvas"></canvas>
+
+  <!-- Ambient Glows -->
+  <div class="ambient-glow glow-top"></div>
+  <div class="ambient-glow glow-bottom"></div>
+
+  <!-- Navigation -->
+  <nav class="navbar" id="navbar">
+    <div class="nav-container">
+      <a href="#hero" class="brand">
+        <div class="brand-icon-wrapper">
+          <img src="./assets/icon.png" alt="شعار مصروفاتي" class="brand-icon">
+          <div class="brand-icon-pulse"></div>
+        </div>
+        <div class="brand-text">
+          <span class="brand-name">مصروفاتي</span>
+          <span class="brand-sub">Masrofaty</span>
+        </div>
+      </a>
+
+      <div class="nav-links">
+        <a href="#features">المميزات</a>
+        <a href="#calculator">حاسبة الأمان</a>
+        <a href="#preview">معاينة التطبيق</a>
+        <a href="#download">التحميل</a>
+        <a href="#faq">الأسئلة الشائعة</a>
+      </div>
+
+      <div class="nav-actions">
+        <a href="#download" class="btn btn-primary btn-sm pulse-btn">
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+          <span>تحميل APK</span>
+        </a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <header class="hero" id="hero">
+    <div class="container hero-grid">
+      <!-- Hero Content -->
+      <div class="hero-content">
+        <div class="hero-badge">
+          <span class="badge-dot"></span>
+          <span class="badge-text">✨ الإصدار 1.0 الرسمي متاح للتحميل الفوري</span>
+        </div>
+
+        <h1 class="hero-title">
+          تحكّم بمصروفاتك بذكاء..
+          <span class="gradient-text">واحسب حدّك اليومي الآمن</span>
+        </h1>
+
+        <p class="hero-desc">
+          وداعاً لانتهاء الراتب في منتصف الشهر! تطبيق <strong>مصروفاتي</strong> يرسم لك خطة مالية ذكية تحسب لك بدقة كم يمكنك أن تنفق في اليوم الواحد لتبقى دائماً في المنطقة الآمنة وتضاعف مدخراتك.
+        </p>
+
+        <!-- CTA Buttons -->
+        <div class="hero-buttons">
+          <!-- Direct Download Button -->
+          <a href="./masrofaty.apk" download="masrofaty.apk" class="btn btn-primary btn-lg download-trigger" id="direct-download-btn">
+            <div class="btn-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+            </div>
+            <div class="btn-text-group">
+              <span class="btn-main-text">تحميل APK مباشر</span>
+              <span class="btn-sub-text">ملف فوري • 124 ميجابايت</span>
+            </div>
+          </a>
+
+          <!-- MediaFire Download Button -->
+          <a href="https://www.mediafire.com/file/7vhyvhda97sx1mu/Masrofaty.apk/" target="_blank" rel="noopener noreferrer" class="btn btn-mediafire btn-lg" id="mediafire-hero-btn">
+            <div class="btn-icon mediafire-icon">
+              <svg viewBox="0 0 24 24" fill="currentColor">
+                <path d="M19.35 10.04C18.67 6.59 15.64 4 12 4 9.11 4 6.6 5.64 5.35 8.04 2.34 8.36 0 10.91 0 14c0 3.31 2.69 6 6 6h13c2.76 0 5-2.24 5-5 0-2.64-2.05-4.78-4.65-4.96zM17 13l-5 5-5-5h3V9h4v4h3z"/>
+              </svg>
+            </div>
+            <div class="btn-text-group">
+              <span class="btn-main-text">تحميل عبر MediaFire</span>
+              <span class="btn-sub-text">سيرفر سريع وبديل</span>
+            </div>
+          </a>
+
+          <!-- QR Code Trigger -->
+          <button class="btn btn-glass btn-icon-only" id="open-qr-modal" title="مسح رمز QR للتحميل من الهاتف">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><circle cx="6.5" cy="6.5" r="1.5" fill="currentColor"/><circle cx="17.5" cy="6.5" r="1.5" fill="currentColor"/><circle cx="17.5" cy="17.5" r="1.5" fill="currentColor"/><circle cx="6.5" cy="17.5" r="1.5" fill="currentColor"/></svg>
+          </button>
+        </div>
+
+        <!-- Trust Badges -->
+        <div class="hero-trust">
+          <div class="trust-item">
+            <svg class="trust-icon" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+            <span>آمن ومفحوص 100%</span>
+          </div>
+          <div class="trust-item">
+            <svg class="trust-icon" viewBox="0 0 24 24" fill="none" stroke="#14b8a6" stroke-width="2.5"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+            <span>مزامنة سحابية سريعة</span>
+          </div>
+          <div class="trust-item">
+            <svg class="trust-icon" viewBox="0 0 24 24" fill="none" stroke="#f59e0b" stroke-width="2.5"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
+            <span>أندرويد 8.0 وأحدث</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- 3D Phone Showcase -->
+      <div class="hero-mockup-wrap">
+        <div class="mockup-3d-scene" id="phone-container">
+          <!-- Floating 3D Badge 1 -->
+          <div class="floating-badge badge-top-right">
+            <div class="badge-icon-wrap emerald">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+            </div>
+            <div>
+              <span class="badge-title">حدك اليومي الآمن</span>
+              <strong class="badge-val text-emerald">240 ج.م / يوم</strong>
+            </div>
+          </div>
+
+          <!-- Floating 3D Badge 2 -->
+          <div class="floating-badge badge-bottom-left">
+            <div class="badge-icon-wrap teal">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg>
+            </div>
+            <div>
+              <span class="badge-title">وفّرت هذا الشهر</span>
+              <strong class="badge-val text-teal">+ 850 ج.م ✨</strong>
+            </div>
+          </div>
+
+          <!-- Phone Frame -->
+          <div class="phone-frame" id="phone-frame">
+            <!-- Dynamic Glare reflection -->
+            <div class="phone-glare"></div>
+
+            <!-- Speaker / Camera Notch -->
+            <div class="phone-notch">
+              <div class="phone-camera"></div>
+              <div class="phone-speaker"></div>
+            </div>
+
+            <!-- Phone Screen Content (Realistic Masrofaty App replica) -->
+            <div class="phone-screen">
+              <!-- App Top Bar -->
+              <div class="app-topbar">
+                <div class="app-user-info">
+                  <span class="app-greeting">مرحباً بك 👋</span>
+                  <strong class="app-date">نوفمبر 2026</strong>
+                </div>
+                <div class="app-logo-badge">
+                  <span>مصروفاتي</span>
+                </div>
+              </div>
+
+              <!-- Main Hero Card inside App -->
+              <div class="app-hero-card">
+                <div class="app-card-header">
+                  <span class="app-label">المتبقي من الميزانية</span>
+                  <span class="app-badge-days">باقي 18 يوم</span>
+                </div>
+                <div class="app-main-balance">
+                  <span class="balance-num">4,320</span>
+                  <span class="balance-currency">ج.م</span>
+                </div>
+                <div class="app-progress-bar">
+                  <div class="app-progress-fill" style="width: 62%;"></div>
+                </div>
+                <div class="app-card-stats">
+                  <div>
+                    <span class="stat-sub">المصروف</span>
+                    <strong>2,680 ج.م</strong>
+                  </div>
+                  <div>
+                    <span class="stat-sub">الحد اليومي</span>
+                    <strong class="text-emerald">240 ج.م</strong>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Mini Safe Limit Banner -->
+              <div class="app-safe-banner">
+                <div class="safe-icon">🛡️</div>
+                <div class="safe-info">
+                  <strong>وضع الميزانية ممتاز</strong>
+                  <span>إنفاقك اليومي أقل من الحد الأقصى الآمن!</span>
+                </div>
+              </div>
+
+              <!-- Quick Expense Items -->
+              <div class="app-recent-head">
+                <span>أحدث المصروفات</span>
+                <span class="view-all">السجل</span>
+              </div>
+              <div class="app-expense-list">
+                <div class="app-item">
+                  <div class="item-icon-box orange">🍔</div>
+                  <div class="item-details">
+                    <strong>غداء عمل</strong>
+                    <span>طعام ومشروبات • اليوم</span>
+                  </div>
+                  <strong class="item-price">- 120 ج.م</strong>
+                </div>
+                <div class="app-item">
+                  <div class="item-icon-box blue">🚕</div>
+                  <div class="item-details">
+                    <strong>مشوار تاكسي</strong>
+                    <span>مواصلات • أمس</span>
+                  </div>
+                  <strong class="item-price">- 45 ج.م</strong>
+                </div>
+                <div class="app-item">
+                  <div class="item-icon-box purple">🛒</div>
+                  <div class="item-details">
+                    <strong>سوبر ماركت</strong>
+                    <span>تسوق • منذ يومين</span>
+                  </div>
+                  <strong class="item-price">- 310 ج.م</strong>
+                </div>
+              </div>
+
+              <!-- App Bottom Navigation -->
+              <div class="app-bottom-nav">
+                <div class="nav-item active">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+                  <span>التحكم</span>
+                </div>
+                <div class="nav-item">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+                  <span>السجل</span>
+                </div>
+                <div class="nav-item">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 12V8H6a2 2 0 0 1-2-2c0-1.1.9-2 2-2h12v4"/><path d="M4 6v12c0 1.1.9 2 2 2h14v-4"/><circle cx="18" cy="12" r="2"/></svg>
+                  <span>الميزانية</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Interactive Live Calculator Section -->
+  <section class="section calculator-section" id="calculator">
+    <div class="container">
+      <div class="section-header text-center">
+        <span class="section-tag">⚡ تجربة تفاعلية حية</span>
+        <h2 class="section-title">جرّب بنفسك: كيف يحسب التطبيق حدك اليومي الآمن؟</h2>
+        <p class="section-subtitle">حرّك المؤشرات وشاهد كيف يحميك ذكاء التطبيق من الوقوع في ضائقة مالية قبل نهاية الشهر.</p>
+      </div>
+
+      <div class="calc-card glass-panel">
+        <div class="calc-inputs">
+          <div class="calc-slider-group">
+            <div class="slider-header">
+              <label for="budget-range">الميزانية الإجمالية المتبقية:</label>
+              <span class="slider-display" id="budget-val">6,000 ج.م</span>
+            </div>
+            <input type="range" id="budget-range" min="1000" max="30000" step="500" value="6000" class="custom-slider">
+            <div class="slider-ticks">
+              <span>1,000 ج.م</span>
+              <span>15,000 ج.م</span>
+              <span>30,000 ج.م</span>
+            </div>
+          </div>
+
+          <div class="calc-slider-group">
+            <div class="slider-header">
+              <label for="days-range">الأيام المتبقية حتى الراتب / الدورة القادمة:</label>
+              <span class="slider-display" id="days-val">25 يوم</span>
+            </div>
+            <input type="range" id="days-range" min="1" max="31" step="1" value="25" class="custom-slider">
+            <div class="slider-ticks">
+              <span>يوم واحد</span>
+              <span>15 يوم</span>
+              <span>31 يوم</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="calc-result-box">
+          <div class="result-badge" id="calc-status-badge">حالة الميزانية: ممتازة 🟢</div>
+          <span class="result-label">الحد الأقصى للإنفاق اليومي الموصى به:</span>
+          <div class="result-number">
+            <span id="daily-limit-result">240</span>
+            <span class="res-curr">ج.م / يوم</span>
+          </div>
+          <p class="result-tip" id="calc-tip">
+            💡 إذا التزمت بإنفاق أقل من هذا المبلغ يومياً، ستنهي الشهر بفائض وستتمكن من الادخار بسهولة!
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Features Section -->
+  <section class="section features-section" id="features">
+    <div class="container">
+      <div class="section-header text-center">
+        <span class="section-tag">💎 مميزات استثنائية</span>
+        <h2 class="section-title">صُمم ليكون رفيقك المالي الأذكى والأبسط</h2>
+        <p class="section-subtitle">لا تعقيدات ولا جداول صعبة، كل ما تحتاجه لتنظيم أموالك في شاشات عصرية واضحة.</p>
+      </div>
+
+      <div class="features-grid">
+        <!-- Feature 1 -->
+        <div class="feature-card glass-panel tilt-card">
+          <div class="feature-icon teal-grad">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          </div>
+          <h3 class="feature-title">معادلة الحد اليومي الآمن</h3>
+          <p class="feature-desc">خوارزمية ذكية تحسب لك لحظة بلحظة المبلغ المسموح بصرفه يومياً وتتعدل تلقائياً كلما سجلت أي مصروف جديد.</p>
+        </div>
+
+        <!-- Feature 2 -->
+        <div class="feature-card glass-panel tilt-card">
+          <div class="feature-icon emerald-grad">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M16 8h-6a2 2 0 1 0 0 4h4a2 2 0 1 1 0 4H8"/><line x1="12" y1="6" x2="12" y2="8"/><line x1="12" y1="16" x2="12" y2="18"/></svg>
+          </div>
+          <h3 class="feature-title">تحديد ميزانية مرنة ومخصصة</h3>
+          <p class="feature-desc">حدد إجمالي ميزانيتك وتاريخ بداية ونهاية دورتك المالية (سواء شهرية أو أسبوعية) بكبسة زر واحدة.</p>
+        </div>
+
+        <!-- Feature 3 -->
+        <div class="feature-card glass-panel tilt-card">
+          <div class="feature-icon orange-grad">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 20V10"/><path d="M12 20V4"/><path d="M6 20v-6"/></svg>
+          </div>
+          <h3 class="feature-title">رسوم بيانية وتحليلات بصرية</h3>
+          <p class="feature-desc">اكتشف أين تذهب أموالك عبر مخططات دائرية وأعمدة تفاعلية تقسم نفقاتك حسب التصنيفات بدقة فائقة.</p>
+        </div>
+
+        <!-- Feature 4 -->
+        <div class="feature-card glass-panel tilt-card">
+          <div class="feature-icon blue-grad">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+          </div>
+          <h3 class="feature-title">تسجيل المصروف في 3 ثوانٍ</h3>
+          <p class="feature-desc">واجهة سريعة وخفيفة تتيح لك إدخال المبلغ وتحديد التصنيف والملاحظات مع دعم كامل للتاريخ والتأثير اللمسي Haptics.</p>
+        </div>
+
+        <!-- Feature 5 -->
+        <div class="feature-card glass-panel tilt-card">
+          <div class="feature-icon purple-grad">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+          </div>
+          <h3 class="feature-title">سجل تفصيلي وبحث متقدم</h3>
+          <p class="feature-desc">تصفية سهلة للمصروفات حسب التاريخ أو التصنيف، مع إمكانية تعديل أو حذف أي مصروف في أي وقت بسهولة تامة.</p>
+        </div>
+
+        <!-- Feature 6 -->
+        <div class="feature-card glass-panel tilt-card">
+          <div class="feature-icon cyan-grad">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 10h-1.26A8 8 0 1 0 9 20h9a5 5 0 0 0 0-10z"/></svg>
+          </div>
+          <h3 class="feature-title">مزامنة سحابية فائقة الأمان</h3>
+          <p class="feature-desc">بياناتك المالية محفوظة ومؤمنة في السحابة فورياً، لن تفقد سجلاتك حتى لو قمت بتغيير هاتفك في أي وقت.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Interactive App Preview Tabs Section -->
+  <section class="section preview-section" id="preview">
+    <div class="container">
+      <div class="section-header text-center">
+        <span class="section-tag">📱 استكشف الشاشات</span>
+        <h2 class="section-title">تجربة مستخدم عربية أصيلة وعصرية</h2>
+        <p class="section-subtitle">شاشات مصممة بأعلى معايير تجربة المستخدم مع خط Cairo الراقي والداعم للغة العربية بالكامل.</p>
+      </div>
+
+      <div class="preview-tabs">
+        <button class="tab-btn active" data-tab="tab-dash">لوحة التحكم (Dashboard)</button>
+        <button class="tab-btn" data-tab="tab-history">سجل المصروفات (History)</button>
+        <button class="tab-btn" data-tab="tab-budget">إعداد الميزانية (Budget)</button>
+      </div>
+
+      <div class="preview-content-box glass-panel">
+        <!-- Tab 1: Dashboard -->
+        <div class="tab-pane active" id="tab-dash">
+          <div class="tab-grid">
+            <div class="tab-text">
+              <span class="tab-badge">الشاشة الرئيسية</span>
+              <h3>لوحة تحكم ذكية تلخص كل ما يهمك</h3>
+              <p>تعرض لك إجمالي المتبقي من الميزانية، عدد الأيام المتبقية، حدك اليومي الحالي، مع مخططات ورسوم بيانية توضح توزيع النفقات وقائمة سريعة بآخر العمليات.</p>
+              <ul class="tab-checklist">
+                <li><span>✓</span> بطاقة الميزانية المركزية مع نسبة الإنجاز البصرية</li>
+                <li><span>✓</span> تنبيهات ذكية لحالة الميزانية (آمنة، حرجة، استثنائية)</li>
+                <li><span>✓</span> زر إضافة مصروف سريع عائم لا يفارق عينيك</li>
+              </ul>
+            </div>
+            <div class="tab-visual">
+              <div class="visual-card">
+                <div class="visual-header">نظرة عامة على الإحصائيات</div>
+                <div class="pie-preview">
+                  <div class="pie-donut">
+                    <span class="pie-percent">62%</span>
+                    <span class="pie-sub">متبقي</span>
+                  </div>
+                  <div class="pie-legend">
+                    <div><span class="dot d-orange"></span> طعام: 45%</div>
+                    <div><span class="dot d-teal"></span> تسوق: 25%</div>
+                    <div><span class="dot d-blue"></span> مواصلات: 18%</div>
+                    <div><span class="dot d-purple"></span> فواتير: 12%</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Tab 2: History -->
+        <div class="tab-pane" id="tab-history">
+          <div class="tab-grid">
+            <div class="tab-text">
+              <span class="tab-badge">سجل النفقات</span>
+              <h3>تتبع كل مليم أين ذهب مع البحث السريع</h3>
+              <p>سجل زمني مرتب يجمع مصروفاتك حسب الأيام، مع إمكانية البحث بالاسم أو الفئة أو المبلغ، وتصفية مخصصة لأي تصنيف تريده.</p>
+              <ul class="tab-checklist">
+                <li><span>✓</span> تجميع زمني منظم حسب كل تاريخ</li>
+                <li><span>✓</span> إمكانية تعديل وحذف المصروف بسهولة</li>
+                <li><span>✓</span> شريط بحث فوري وسلس</li>
+              </ul>
+            </div>
+            <div class="tab-visual">
+              <div class="visual-card">
+                <div class="visual-header">سجل اليوم (الخميس)</div>
+                <div class="history-list-preview">
+                  <div class="h-row">
+                    <div class="h-cat">🍔 طعام</div>
+                    <div class="h-note">غداء في المطعم</div>
+                    <div class="h-amt">- 185 ج.م</div>
+                  </div>
+                  <div class="h-row">
+                    <div class="h-cat">☕ ترفيه</div>
+                    <div class="h-note">قهوة مع الأصدقاء</div>
+                    <div class="h-amt">- 55 ج.م</div>
+                  </div>
+                  <div class="h-row">
+                    <div class="h-cat">🚕 مواصلات</div>
+                    <div class="h-note">بنزين السيارة</div>
+                    <div class="h-amt">- 200 ج.م</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Tab 3: Budget -->
+        <div class="tab-pane" id="tab-budget">
+          <div class="tab-grid">
+            <div class="tab-text">
+              <span class="tab-badge">إعداد الميزانية</span>
+              <h3>تحكم كامل بدورتك المالية وتواريخها</h3>
+              <p>سواء كنت تستلم راتبك أول الشهر، أو منتصفه، أو تعمل بنظام العمل الحر؛ حدد تاريخ بداية الدورة ونهايتها وقيمة الميزانية، ودع التطبيق يتولى الباقي.</p>
+              <ul class="tab-checklist">
+                <li><span>✓</span> منتقي تواريخ ذكي مدمج ومتوافق مع العربية</li>
+                <li><span>✓</span> حساب فوري للحد اليومي قبل حفظ التغييرات</li>
+                <li><span>✓</span> إمكانية تجديد وتعديل الميزانية في أي وقت</li>
+              </ul>
+            </div>
+            <div class="tab-visual">
+              <div class="visual-card">
+                <div class="visual-header">إعداد الدورة المالية</div>
+                <div class="budget-form-preview">
+                  <div class="b-field">
+                    <span>إجمالي الميزانية:</span>
+                    <strong>8,500 ج.م</strong>
+                  </div>
+                  <div class="b-field">
+                    <span>من:</span>
+                    <strong>01 نوفمبر 2026</strong>
+                  </div>
+                  <div class="b-field">
+                    <span>إلى:</span>
+                    <strong>30 نوفمبر 2026</strong>
+                  </div>
+                  <div class="b-highlight">
+                    الحد اليومي التقديري: <strong>283.33 ج.م / يوم</strong>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Download Hub Section -->
+  <section class="section download-section" id="download">
+    <div class="container">
+      <div class="download-card glass-panel">
+        <div class="download-header text-center">
+          <div class="download-badge">📲 التحميل المباشر للاندرويد</div>
+          <h2 class="download-title">احصل على نسختك من تطبيق "مصروفاتي" الآن مجاناً</h2>
+          <p class="download-subtitle">اختر وسيلة التحميل المفضلة لديك وثبّت التطبيق على هاتفك في أقل من دقيقة!</p>
+        </div>
+
+        <div class="download-options-grid">
+          <!-- Option 1: Direct APK Download -->
+          <div class="download-box recommended-box">
+            <div class="box-badge">الخيار الموصى به ⭐</div>
+            <div class="box-icon-head">
+              <div class="icon-circle teal">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+              </div>
+              <div>
+                <h3>تحميل APK مباشر</h3>
+                <span class="file-size-tag">حجم الملف: 124 ميجابايت • إصدار v1.0.0</span>
+              </div>
+            </div>
+            <p class="box-desc">التحميل فوري ومباشر من السيرفر بسرعة قصوى وبدون إعلانات أو روابط وسيطة.</p>
+            <a href="./masrofaty.apk" download="masrofaty.apk" class="btn btn-primary btn-block">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+              <span>بدء التحميل المباشر</span>
+            </a>
+          </div>
+
+          <!-- Option 2: MediaFire Download -->
+          <div class="download-box mediafire-box">
+            <div class="box-icon-head">
+              <div class="icon-circle mf-blue">
+                <svg viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M19.35 10.04C18.67 6.59 15.64 4 12 4 9.11 4 6.6 5.64 5.35 8.04 2.34 8.36 0 10.91 0 14c0 3.31 2.69 6 6 6h13c2.76 0 5-2.24 5-5 0-2.64-2.05-4.78-4.65-4.96zM17 13l-5 5-5-5h3V9h4v4h3z"/>
+                </svg>
+              </div>
+              <div>
+                <h3>تحميل عبر MediaFire</h3>
+                <span class="file-size-tag">سيرفر MediaFire السحابي الموثوق</span>
+              </div>
+            </div>
+            <p class="box-desc">سيرفر بديل سريع ومتاح دائماً في حال كنت تفضل التحميل عبر موقع ميديا فاير الشهير.</p>
+            
+            <!-- Configurable MediaFire Link Button -->
+            <a href="https://www.mediafire.com/file/7vhyvhda97sx1mu/Masrofaty.apk/" target="_blank" rel="noopener noreferrer" class="btn btn-mediafire btn-block" id="mediafire-main-btn">
+              <svg viewBox="0 0 24 24" fill="currentColor" class="mf-svg"><path d="M19.35 10.04C18.67 6.59 15.64 4 12 4 9.11 4 6.6 5.64 5.35 8.04 2.34 8.36 0 10.91 0 14c0 3.31 2.69 6 6 6h13c2.76 0 5-2.24 5-5 0-2.64-2.05-4.78-4.65-4.96zM17 13l-5 5-5-5h3V9h4v4h3z"/></svg>
+              <span>فتح رابط MediaFire</span>
+            </a>
+
+            <!-- Quick update link tooltip / note -->
+            <div class="mediafire-hint">
+              <small>💡 ملاحظة: يمكنك تغيير رابط MediaFire في أي وقت من ملف الإعدادات <code>app.js</code> أو <code>index.html</code>.</small>
+            </div>
+          </div>
+
+          <!-- Option 3: Scan QR Code -->
+          <div class="download-box qr-box">
+            <div class="box-icon-head">
+              <div class="icon-circle gold">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+              </div>
+              <div>
+                <h3>مسح رمز الـ QR</h3>
+                <span class="file-size-tag">للتحميل المباشر بكاميرا الهاتف</span>
+              </div>
+            </div>
+            <div class="qr-container">
+              <img id="qr-code-img" src="https://api.qrserver.com/v1/create-qr-code/?size=220x220&data=https://www.mediafire.com/file/7vhyvhda97sx1mu/Masrofaty.apk/&bgcolor=090d16&color=14b8a6&margin=6" alt="QR Code للتحميل من الهاتف" class="qr-image">
+            </div>
+            <p class="qr-note">وجّه كاميرا هاتفك إلى الرمز وسيتم بدء التحميل تلقائياً!</p>
+          </div>
+        </div>
+
+        <!-- Installation Instructions -->
+        <div class="install-guide">
+          <h4 class="guide-title">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+            كيفية تثبيت ملف الـ APK على هاتفك الأندرويد في 3 خطوات بسيطة:
+          </h4>
+          <div class="steps-row">
+            <div class="step-card">
+              <span class="step-num">1</span>
+              <h5>تحميل الملف</h5>
+              <p>اضغط على زر التحميل المباشر أو امسح رمز الـ QR ليبدأ تنزيل الملف.</p>
+            </div>
+            <div class="step-card">
+              <span class="step-num">2</span>
+              <h5>السماح بالتثبيت</h5>
+              <p>عند فتح الملف، اضغط "الإعدادات" ثم فعّل "السماح بتثبيت التطبيقات من هذا المصدر".</p>
+            </div>
+            <div class="step-card">
+              <span class="step-num">3</span>
+              <h5>ابدأ التوفير!</h5>
+              <p>اضغط على "تثبيت" وافتح التطبيق لتحدد ميزانيتك وتنطلق في إدارة أموالك بنجاح.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Customer Reviews / Social Proof -->
+  <section class="section reviews-section">
+    <div class="container">
+      <div class="section-header text-center">
+        <span class="section-tag">⭐ تجارب حقيقية</span>
+        <h2 class="section-title">ماذا يقول مستخدمو "مصروفاتي"؟</h2>
+      </div>
+
+      <div class="reviews-grid">
+        <div class="review-card glass-panel">
+          <div class="stars">★★★★★</div>
+          <p class="review-text">"فكرة الحد اليومي الآمن عبقرية بجد! كنت دايمًا بخلّص الراتب قبل نهاية الشهر بـ 10 أيام، دلوقتي بقيت عارف بالظبط أقدر أصرف كام كل يوم ومكمل الشهر مرتاح."</p>
+          <div class="reviewer">
+            <div class="avatar-circle">م.ح</div>
+            <div>
+              <strong>محمد حسن</strong>
+              <span>مهندس برمجيات • القاهرة</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="review-card glass-panel">
+          <div class="stars">★★★★★</div>
+          <p class="review-text">"التطبيق سريع جداً وشاشاته مريحة للعين، الخط العربي المستخدم فيه تحفة وتسجيل المصروف مبياخدش ثواني، الرسوم البيانية موضحة كل حاجة."</p>
+          <div class="reviewer">
+            <div class="avatar-circle">س.ع</div>
+            <div>
+              <strong>سارة عبد الله</strong>
+              <span>مصممة جرافيك • الرياض</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="review-card glass-panel">
+          <div class="stars">★★★★★</div>
+          <p class="review-text">"أحسن حاجة إن الميزانية مش مرتبطة بس بأول الشهر، قدرت أحدد دورتي المالية من يوم 25 ليوم 25 وحسبلي الحد اليومي بدقة متناهية."</p>
+          <div class="reviewer">
+            <div class="avatar-circle">ع.م</div>
+            <div>
+              <strong>عمر محمود</strong>
+              <span>أعمال حرة • الإسكندرية</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ Section -->
+  <section class="section faq-section" id="faq">
+    <div class="container">
+      <div class="section-header text-center">
+        <span class="section-tag">❓ الأسئلة الشائعة</span>
+        <h2 class="section-title">كل ما تريد معرفته عن التطبيق</h2>
+      </div>
+
+      <div class="faq-accordion">
+        <div class="faq-item glass-panel">
+          <button class="faq-question">
+            <span>هل تطبيق مصروفاتي مجاني؟</span>
+            <span class="faq-toggle">+</span>
+          </button>
+          <div class="faq-answer">
+            <p>نعم، التطبيق متاح للتحميل والاستخدام بشكل مجاني تماماً وبدون أي رسوم خفية، مع توفير كافة المميزات المتقدمة وحسابات الميزانية والسحابة.</p>
+          </div>
+        </div>
+
+        <div class="faq-item glass-panel">
+          <button class="faq-question">
+            <span>ما هي الهواتف المدعومة؟</span>
+            <span class="faq-toggle">+</span>
+          </button>
+          <div class="faq-answer">
+            <p>ملف الـ APK متوافق مع جميع هواتف أندرويد التي تعمل بنظام تشغيل Android 8.0 (Oreo) وما بعده (سامسونج، شاومي، هواوي، أوبو، ريلمي، فيفو، بيكسل، وغيرها).</p>
+          </div>
+        </div>
+
+        <div class="faq-item glass-panel">
+          <button class="faq-question">
+            <span>كيف تضمنون أمان وحفظ بياناتي المالية؟</span>
+            <span class="faq-toggle">+</span>
+          </button>
+          <div class="faq-answer">
+            <p>يستخدم التطبيق بنية سحابية آمنة ومشفرة تماماً عبر منصة Supabase العالمية، مع تشفير لجميع الاتصالات ولا يتم مشاركة أي من بياناتك مع أي طرف ثالث على الإطلاق.</p>
+          </div>
+        </div>
+
+        <div class="faq-item glass-panel">
+          <button class="faq-question">
+            <span>هل يمكنني استخدام التطبيق إذا كانت دورتي المالية أسبوعية أو تبدأ في يوم 10 من الشهر؟</span>
+            <span class="faq-toggle">+</span>
+          </button>
+          <div class="faq-answer">
+            <p>بكل تأكيد! في شاشة "الميزانية"، يمكنك اختيار أي تاريخ بداية وأي تاريخ نهاية بحرية تامة، وسيقوم التطبيق بحساب الأيام المتبقية وتقسيم الميزانية عليها تلقائياً وبدقة متناهية.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container footer-content">
+      <div class="footer-brand">
+        <div class="brand">
+          <img src="./assets/icon.png" alt="مصروفاتي" class="brand-icon">
+          <span class="brand-name">مصروفاتي</span>
+        </div>
+        <p class="footer-tagline">تطبيقك الذكي للسيطرة الكاملة على ميزانيتك ونفقاتك اليومية.</p>
+      </div>
+
+      <div class="footer-links">
+        <a href="#hero">الرئيسية</a>
+        <a href="#features">المميزات</a>
+        <a href="#calculator">الحاسبة</a>
+        <a href="#download">التحميل</a>
+        <a href="#faq">الأسئلة الشائعة</a>
+      </div>
+
+      <div class="footer-copy">
+        <p>© 2026 جميع الحقوق محفوظة لتطبيق <strong>مصروفاتي (Masrofaty)</strong>.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- QR Code Modal -->
+  <div class="modal" id="qr-modal">
+    <div class="modal-overlay" id="qr-modal-overlay"></div>
+    <div class="modal-card glass-panel">
+      <button class="modal-close" id="close-qr-modal">&times;</button>
+      <div class="modal-header text-center">
+        <div class="icon-circle teal" style="margin: 0 auto 12px;">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+        </div>
+        <h3>مسح الرمز للتحميل المباشر</h3>
+        <p>افتح كاميرا هاتفك الأندرويد ووجّهها إلى الرمز للبدء فوراً في تنزيل ملف الـ APK.</p>
+      </div>
+      <div class="modal-qr-body text-center">
+        <img src="https://api.qrserver.com/v1/create-qr-code/?size=220x220&data=https://www.mediafire.com/file/7vhyvhda97sx1mu/Masrofaty.apk/&bgcolor=090d16&color=14b8a6&margin=6" alt="QR Code" class="modal-qr-img">
+        <div class="modal-apk-badge">
+          <span>حجم الملف: 124 ميجابايت • إصدار v1.0.0</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Sticky Mobile Download Bar -->
+  <div class="mobile-sticky-bar" id="mobile-sticky-bar">
+    <div class="mobile-bar-info">
+      <img src="./assets/icon.png" alt="مصروفاتي" class="mobile-bar-icon">
+      <div>
+        <strong>مصروفاتي APK</strong>
+        <small>مجاني • 124 ميجابايت</small>
+      </div>
+    </div>
+    <a href="./masrofaty.apk" download="masrofaty.apk" class="btn btn-primary btn-sm">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/></svg>
+      <span>تحميل</span>
+    </a>
+  </div>
+
+  <!-- Script -->
+  <script src="app.js"></script>
+</body>
+</html>
